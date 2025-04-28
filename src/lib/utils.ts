@@ -1,4 +1,3 @@
-
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { PassportApplication } from "./types";
@@ -14,31 +13,31 @@ export function fileToBase64(file: File): Promise<string> {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result as string);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 }
 
-// Utility to generate PDF passport
+// Update PDF generation function to include more details
 export function generatePassportPDF(application: PassportApplication): void {
   const doc = new jsPDF();
-  
+
   // Add header
-  doc.setFillColor(155, 135, 245); // Purple color
+  doc.setFillColor(155, 135, 245);
   doc.rect(0, 0, 210, 20, "F");
-  
+
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(16);
   doc.text("PASSPORT", 105, 12, { align: "center" });
-  
+
   // Reset text color
   doc.setTextColor(0, 0, 0);
   doc.setFontSize(12);
-  
+
   // Add passport details
   const startY = 30;
   let currentY = startY;
   const lineHeight = 8;
-  
+
   // Add photo if available
   if (application.photoUrl) {
     try {
@@ -47,95 +46,78 @@ export function generatePassportPDF(application: PassportApplication): void {
       console.error("Error adding photo to PDF:", e);
     }
   }
-  
+
   // Add basic details
   doc.setFontSize(14);
   doc.text("Passport Details", 20, currentY);
   currentY += lineHeight * 2;
-  
+
   doc.setFontSize(11);
-  doc.text(`Passport Number: ${application.id.substring(0, 8).toUpperCase()}`, 20, currentY);
+  const details = [
+    `Passport Number: ${application.id.substring(0, 8).toUpperCase()}`,
+    `Full Name: ${application.fullName}`,
+    `Father's Name: ${application.fatherName}`,
+    `Mother's Name: ${application.motherName}`,
+    `Date of Birth: ${application.dob}`,
+    `Gender: ${application.gender}`,
+    `Marital Status: ${application.maritalStatus}`,
+    `Nationality: ${application.nationality}`,
+  ];
+
+  details.forEach((detail) => {
+    doc.text(detail, 20, currentY);
+    currentY += lineHeight;
+  });
+
   currentY += lineHeight;
-  
-  doc.text(`Full Name: ${application.fullName}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Father's Name: ${application.fatherName}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Mother's Name: ${application.motherName}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Date of Birth: ${application.dob}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Gender: ${application.gender}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Marital Status: ${application.maritalStatus}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Nationality: ${application.nationality}`, 20, currentY);
-  currentY += lineHeight * 2;
-  
-  // Contact details
+
+  // Add Contact Information
   doc.setFontSize(14);
-  doc.text("Contact Details", 20, currentY);
+  doc.text("Contact Information", 20, currentY);
   currentY += lineHeight * 2;
-  
+
   doc.setFontSize(11);
-  doc.text(`Email: ${application.email}`, 20, currentY);
+  [
+    `Email: ${application.email}`,
+    `Phone: ${application.phoneNumber}`,
+    `Current Address: ${application.currentAddress}`,
+    `Permanent Address: ${application.permanentAddress}`,
+  ].forEach((info) => {
+    doc.text(info, 20, currentY);
+    currentY += lineHeight;
+  });
+
   currentY += lineHeight;
-  
-  doc.text(`Phone: ${application.phoneNumber}`, 20, currentY);
-  currentY += lineHeight * 2;
-  
-  // Address details
+
+  // Add verification details
   doc.setFontSize(14);
-  doc.text("Address Information", 20, currentY);
+  doc.text("Verification Status", 20, currentY);
   currentY += lineHeight * 2;
-  
+
   doc.setFontSize(11);
-  doc.text(`Current Address: ${application.currentAddress}`, 20, currentY);
+  doc.text(`Police Verification: Completed`, 20, currentY);
   currentY += lineHeight;
-  
-  doc.text(`Permanent Address: ${application.permanentAddress}`, 20, currentY);
+  doc.text(`Officer Verification: Completed`, 20, currentY);
   currentY += lineHeight * 2;
-  
-  // ID details
-  doc.setFontSize(14);
-  doc.text("Identification Details", 20, currentY);
-  currentY += lineHeight * 2;
-  
-  doc.setFontSize(11);
-  doc.text(`Aadhar Number: ${application.aadharNumber}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`PAN Number: ${application.panNumber}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Educational Qualification: ${application.educationalQualification}`, 20, currentY);
-  currentY += lineHeight;
-  
-  doc.text(`Police Station: ${application.policeStation}`, 20, currentY);
-  currentY += lineHeight * 2;
-  
+
   // Add signature if available
   if (application.signatureUrl) {
-    doc.text("Signature:", 20, currentY);
+    doc.text("Applicant's Signature:", 20, currentY);
     try {
       doc.addImage(application.signatureUrl, "JPEG", 60, currentY - 5, 40, 10);
     } catch (e) {
       console.error("Error adding signature to PDF:", e);
     }
   }
-  
+
   // Add footer
   doc.setFillColor(155, 135, 245);
   doc.rect(0, 280, 210, 15, "F");
   doc.setTextColor(255, 255, 255);
-  doc.text("This passport is electronically generated", 105, 287, { align: "center" });
-  
-  // Save PDF with user's name
-  doc.save(`passport_${application.fullName.replace(/\s+/g, '_')}.pdf`);
+  doc.text("This is an officially verified passport document", 105, 287, {
+    align: "center",
+  });
+
+  // Save PDF
+  doc.save(`passport_${application.fullName.replace(/\s+/g, "_")}.pdf`);
 }

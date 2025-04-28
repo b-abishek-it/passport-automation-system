@@ -1,54 +1,54 @@
-
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { auth } from '@/lib/auth';
-import { User } from '@/lib/types';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { auth } from "@/lib/auth";
+import { User } from "@/lib/types";
+import { Home } from "lucide-react";
 
 const Header = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     // Update header when auth state changes
     setCurrentUser(auth.getCurrentUser());
-    
+
     // Check auth status on component mount
     const checkAuthStatus = () => {
       setCurrentUser(auth.getCurrentUser());
     };
-    
-    window.addEventListener('storage', checkAuthStatus);
+
+    window.addEventListener("storage", checkAuthStatus);
     return () => {
-      window.removeEventListener('storage', checkAuthStatus);
+      window.removeEventListener("storage", checkAuthStatus);
     };
   }, []);
-  
+
   const handleLogout = () => {
     auth.logout();
     setCurrentUser(null);
-    navigate('/');
+    navigate("/");
   };
-  
+
   const getDashboardLink = () => {
-    if (!currentUser) return '/';
-    
+    if (!currentUser) return "/";
+
     switch (currentUser.role) {
-      case 'user':
-        return '/user-dashboard';
-      case 'police':
-        return '/police-dashboard';
-      case 'officer':
-        return '/officer-dashboard';
+      case "user":
+        return "/user-dashboard";
+      case "police":
+        return "/police-dashboard";
+      case "officer":
+        return "/officer-dashboard";
       default:
-        return '/';
+        return "/";
     }
   };
-  
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center space-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -66,11 +66,21 @@ const Header = () => {
             </svg>
             <span className="font-bold text-xl">PassportEase</span>
           </Link>
+          <Link
+            to="/"
+            className="flex items-center space-x-1 text-sm font-medium hover:underline"
+          >
+            <Home className="h-4 w-4" />
+            <span>Home</span>
+          </Link>
         </div>
         <nav className="flex items-center gap-6">
           {currentUser ? (
             <>
-              <Link to={getDashboardLink()} className="text-sm font-medium hover:underline">
+              <Link
+                to={getDashboardLink()}
+                className="text-sm font-medium hover:underline"
+              >
                 Dashboard
               </Link>
               <div className="flex items-center gap-2">
@@ -85,7 +95,9 @@ const Header = () => {
           ) : (
             <div className="flex items-center gap-2">
               <Link to="/login">
-                <Button variant="outline" size="sm">Login</Button>
+                <Button variant="outline" size="sm">
+                  Login
+                </Button>
               </Link>
               <Link to="/register">
                 <Button size="sm">Register</Button>
