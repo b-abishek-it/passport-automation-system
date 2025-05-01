@@ -1,4 +1,3 @@
-
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { PassportApplication } from "./types";
@@ -113,7 +112,7 @@ export function generatePassportPDF(application: PassportApplication): void {
 
   // Add passport approval seal to the right side of the document
   try {
-    const sealImagePath = '/lovable-uploads/bf0bcff1-9718-4b6e-a848-a15da1fb622c.png';
+    const sealImagePath = "/public/Seal.jpg";
     doc.addImage(sealImagePath, "PNG", 125, 200, 60, 60);
   } catch (e) {
     console.error("Error adding seal to PDF:", e);
