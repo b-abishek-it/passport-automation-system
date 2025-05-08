@@ -16,7 +16,7 @@ const Index = () => {
         <div className="text-center mb-16">
           <div className="mx-auto mb-8 max-w-2xl">
             <img
-              src="/public/pic.png"
+              src="/public/Pic.png"
               alt="Passport"
               className="w-full rounded-lg shadow-lg"
             />
