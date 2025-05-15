@@ -47,46 +47,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Process Steps */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-16">
-          <h2 className="text-3xl font-bold mb-10 text-center text-secondary">How It Works</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="step-circle">
-                <span className="text-2xl font-bold text-primary">1</span>
-              </div>
-              <h3 className="text-xl font-medium mb-3">Submit Application</h3>
-              <p className="text-gray-600">
-                Register and fill out the digital passport application form with your 
-                personal details and required documentation
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="step-circle">
-                <span className="text-2xl font-bold text-primary">2</span>
-              </div>
-              <h3 className="text-xl font-medium mb-3">Official Verification</h3>
-              <p className="text-gray-600">
-                Police verify your address and background while passport officers
-                validate your application and supporting documents
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="step-circle">
-                <span className="text-2xl font-bold text-primary">3</span>
-              </div>
-              <h3 className="text-xl font-medium mb-3">Receive Your Passport</h3>
-              <p className="text-gray-600">
-                Once approved, download your electronic passport instantly and track 
-                physical passport delivery status
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* User Types Section */}
         <h2 className="text-3xl font-bold mb-8 text-center text-secondary">Access Your Portal</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
