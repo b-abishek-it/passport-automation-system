@@ -1,13 +1,5 @@
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
@@ -40,8 +32,8 @@ const Index = () => {
           </div>
           <div className="flex-1 max-w-md">
             <img
-              src="/Pic.jpg"
-              alt="Passport"
+              src="/lovable-uploads/6975f626-3e29-4d20-b9d5-24af53e8e2bd.png"
+              alt="Indian Passport"
               className="w-full rounded-2xl shadow-xl"
             />
           </div>

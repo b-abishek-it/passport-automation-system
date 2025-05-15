@@ -86,7 +86,7 @@ const Header = () => {
               <path d="M9 3v18" />
               <path d="m16 15-3-3 3-3" />
             </svg>
-            <span className="font-bold text-xl">PassportEase</span>
+            <span className="font-bold text-xl">Passport Automation System</span>
           </Link>
           
           {/* Desktop Navigation */}
