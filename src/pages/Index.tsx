@@ -18,10 +18,10 @@ const Index = () => {
         {/* Hero Section */}
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 mb-20">
           <div className="flex-1 text-left">
-            <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-passport-blue mb-4 leading-tight">
               Modern Passport <span className="text-primary">Management System</span>
             </h1>
-            <p className="text-lg text-gray-600 mb-6 max-w-xl">
+            <p className="text-lg text-passport-blue/70 mb-6 max-w-xl">
               A streamlined solution for secure passport application, verification,
               and digital passport management with enhanced security features.
             </p>
@@ -48,12 +48,12 @@ const Index = () => {
         </div>
 
         {/* User Types Section */}
-        <h2 className="text-3xl font-bold mb-8 text-center text-secondary">Access Your Portal</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-passport-blue">Access Your Portal</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <Card className="auth-card border-t-4 border-t-blue-400">
+          <Card className="auth-card border-t-4 border-t-primary">
             <CardHeader className="pb-3">
               <div className="mb-2 flex justify-center">
-                <User className="h-10 w-10 text-blue-500" />
+                <User className="h-10 w-10 text-primary" />
               </div>
               <CardTitle className="text-center">Applicant Portal</CardTitle>
               <CardDescription className="text-center">
@@ -61,7 +61,7 @@ const Index = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-passport-blue/70">
                 Submit new applications, track existing applications, upload required documents,
                 and download your e-passport once approved.
               </p>
@@ -78,10 +78,10 @@ const Index = () => {
             </CardFooter>
           </Card>
 
-          <Card className="auth-card border-t-4 border-t-indigo-400">
+          <Card className="auth-card border-t-4 border-t-primary">
             <CardHeader className="pb-3">
               <div className="mb-2 flex justify-center">
-                <Shield className="h-10 w-10 text-indigo-500" />
+                <Shield className="h-10 w-10 text-primary" />
               </div>
               <CardTitle className="text-center">Police Portal</CardTitle>
               <CardDescription className="text-center">
@@ -89,7 +89,7 @@ const Index = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-passport-blue/70">
                 Access and verify applicant details, conduct address verification,
                 approve or request additional information from applicants.
               </p>
@@ -103,10 +103,10 @@ const Index = () => {
             </CardFooter>
           </Card>
 
-          <Card className="auth-card border-t-4 border-t-green-400">
+          <Card className="auth-card border-t-4 border-t-primary">
             <CardHeader className="pb-3">
               <div className="mb-2 flex justify-center">
-                <FileCheck className="h-10 w-10 text-green-500" />
+                <FileCheck className="h-10 w-10 text-primary" />
               </div>
               <CardTitle className="text-center">Passport Officer Portal</CardTitle>
               <CardDescription className="text-center">
@@ -114,7 +114,7 @@ const Index = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-passport-blue/70">
                 Review applications, verify submitted documents, manage passport
                 issuance, and handle passport queries.
               </p>
@@ -130,13 +130,13 @@ const Index = () => {
         </div>
 
         {/* Features Section */}
-        <div className="bg-secondary/5 rounded-2xl p-8 mb-12">
-          <h2 className="text-3xl font-bold mb-8 text-center text-secondary">Key Features</h2>
+        <div className="bg-primary/5 rounded-2xl p-8 mb-12">
+          <h2 className="text-3xl font-bold mb-8 text-center text-passport-blue">Key Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="feature-card">
               <CardContent className="p-6">
                 <h3 className="text-xl font-medium mb-2">Digital Verification</h3>
-                <p className="text-gray-600">
+                <p className="text-passport-blue/70">
                   Secure document verification process with multi-level checks
                 </p>
               </CardContent>
@@ -144,7 +144,7 @@ const Index = () => {
             <Card className="feature-card">
               <CardContent className="p-6">
                 <h3 className="text-xl font-medium mb-2">Real-time Tracking</h3>
-                <p className="text-gray-600">
+                <p className="text-passport-blue/70">
                   Monitor your application status at every step of the process
                 </p>
               </CardContent>
@@ -152,7 +152,7 @@ const Index = () => {
             <Card className="feature-card">
               <CardContent className="p-6">
                 <h3 className="text-xl font-medium mb-2">Secure Document Storage</h3>
-                <p className="text-gray-600">
+                <p className="text-passport-blue/70">
                   Encrypted storage for all your sensitive documents and information
                 </p>
               </CardContent>
@@ -160,7 +160,7 @@ const Index = () => {
             <Card className="feature-card">
               <CardContent className="p-6">
                 <h3 className="text-xl font-medium mb-2">E-Passport Support</h3>
-                <p className="text-gray-600">
+                <p className="text-passport-blue/70">
                   Download electronic passports immediately upon approval
                 </p>
               </CardContent>
