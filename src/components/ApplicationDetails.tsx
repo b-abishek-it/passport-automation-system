@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardContent,
@@ -7,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { File, Image, Signature } from "lucide-react";
+import { File, Image, Signature, FileText } from "lucide-react";
 import { PassportApplication } from "@/lib/types";
 import ApplicationStatusBadge from "@/components/ApplicationStatusBadge";
 import { generatePassportPDF } from "@/lib/utils";
@@ -155,14 +156,62 @@ const ApplicationDetails = ({
                   "Not uploaded"
                 )}
               </p>
-              <p>
-                <span className="font-medium">Police Verified:</span>{" "}
-                {application.policeVerified ? "Yes" : "No"}
-              </p>
-              <p>
-                <span className="font-medium">Officer Verified:</span>{" "}
-                {application.officerVerified ? "Yes" : "No"}
-              </p>
+              
+              {/* Added document displays */}
+              <div className="mt-4">
+                <h4 className="font-medium mb-2">Uploaded Documents</h4>
+                <div className="space-y-2">
+                  {application.aadharUrl && (
+                    <div className="flex items-center">
+                      <FileText className="h-4 w-4 mr-2 text-blue-500" />
+                      <Button
+                        variant="link"
+                        onClick={() => window.open(application.aadharUrl)}
+                        className="h-auto p-0"
+                      >
+                        View Aadhar Card
+                      </Button>
+                    </div>
+                  )}
+                  
+                  {application.panUrl && (
+                    <div className="flex items-center">
+                      <FileText className="h-4 w-4 mr-2 text-blue-500" />
+                      <Button
+                        variant="link"
+                        onClick={() => window.open(application.panUrl)}
+                        className="h-auto p-0"
+                      >
+                        View PAN Card
+                      </Button>
+                    </div>
+                  )}
+                  
+                  {application.educationUrl && (
+                    <div className="flex items-center">
+                      <FileText className="h-4 w-4 mr-2 text-blue-500" />
+                      <Button
+                        variant="link"
+                        onClick={() => window.open(application.educationUrl)}
+                        className="h-auto p-0"
+                      >
+                        View Education Certificate
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <p>
+                  <span className="font-medium">Police Verified:</span>{" "}
+                  {application.policeVerified ? "Yes" : "No"}
+                </p>
+                <p>
+                  <span className="font-medium">Officer Verified:</span>{" "}
+                  {application.officerVerified ? "Yes" : "No"}
+                </p>
+              </div>
             </div>
           </div>
         </div>

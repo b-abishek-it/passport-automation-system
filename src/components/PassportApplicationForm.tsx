@@ -42,6 +42,9 @@ const PassportApplicationForm = ({ onSubmit }: PassportApplicationFormProps) => 
   
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [signatureFile, setSignatureFile] = useState<File | null>(null);
+  const [aadharFile, setAadharFile] = useState<File | null>(null);
+  const [panFile, setPanFile] = useState<File | null>(null);
+  const [educationFile, setEducationFile] = useState<File | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -68,6 +71,24 @@ const PassportApplicationForm = ({ onSubmit }: PassportApplicationFormProps) => 
   const handleSignatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSignatureFile(e.target.files[0]);
+    }
+  };
+  
+  const handleAadharFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setAadharFile(e.target.files[0]);
+    }
+  };
+  
+  const handlePanFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setPanFile(e.target.files[0]);
+    }
+  };
+  
+  const handleEducationFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setEducationFile(e.target.files[0]);
     }
   };
   
@@ -103,10 +124,10 @@ const PassportApplicationForm = ({ onSubmit }: PassportApplicationFormProps) => 
       return;
     }
     
-    if (!photoFile || !signatureFile) {
+    if (!photoFile || !signatureFile || !aadharFile || !panFile || !educationFile) {
       toast({
         title: "Validation Error",
-        description: "Please upload both photo and signature files",
+        description: "Please upload all required documents (photo, signature, Aadhar card, PAN card, and education certificate)",
         variant: "destructive"
       });
       return;
@@ -127,13 +148,19 @@ const PassportApplicationForm = ({ onSubmit }: PassportApplicationFormProps) => 
       // Convert files to base64
       const photoBase64 = await fileToBase64(photoFile);
       const signatureBase64 = await fileToBase64(signatureFile);
+      const aadharBase64 = await fileToBase64(aadharFile);
+      const panBase64 = await fileToBase64(panFile);
+      const educationBase64 = await fileToBase64(educationFile);
       
       // Submit application
       onSubmit({
         ...formData,
         userId: currentUser.id,
         photoUrl: photoBase64,
-        signatureUrl: signatureBase64
+        signatureUrl: signatureBase64,
+        aadharUrl: aadharBase64,
+        panUrl: panBase64,
+        educationUrl: educationBase64
       });
       
       // Reset form
@@ -156,6 +183,9 @@ const PassportApplicationForm = ({ onSubmit }: PassportApplicationFormProps) => 
       });
       setPhotoFile(null);
       setSignatureFile(null);
+      setAadharFile(null);
+      setPanFile(null);
+      setEducationFile(null);
       setSelectedDate(undefined);
       
     } catch (error) {
@@ -429,6 +459,48 @@ const PassportApplicationForm = ({ onSubmit }: PassportApplicationFormProps) => 
             />
             <p className="text-xs text-muted-foreground mt-1">
               Upload a clear image of your signature
+            </p>
+          </div>
+          
+          <div>
+            <Label htmlFor="aadharFile">Aadhar Card Scan</Label>
+            <Input
+              id="aadharFile"
+              type="file"
+              accept="image/*,.pdf"
+              onChange={handleAadharFileChange}
+              required
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              Upload a scanned copy of your Aadhar card (PDF or image)
+            </p>
+          </div>
+          
+          <div>
+            <Label htmlFor="panFile">PAN Card Scan</Label>
+            <Input
+              id="panFile"
+              type="file"
+              accept="image/*,.pdf"
+              onChange={handlePanFileChange}
+              required
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              Upload a scanned copy of your PAN card (PDF or image)
+            </p>
+          </div>
+          
+          <div>
+            <Label htmlFor="educationFile">Education Certificate</Label>
+            <Input
+              id="educationFile"
+              type="file"
+              accept="image/*,.pdf"
+              onChange={handleEducationFileChange}
+              required
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              Upload your highest education certificate (PDF or image)
             </p>
           </div>
         </div>
