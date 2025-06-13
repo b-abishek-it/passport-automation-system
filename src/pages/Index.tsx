@@ -35,7 +35,7 @@ const Index = () => {
               src="/Pic.jpg"
               alt="Passport"
               className="w-full rounded-2xl shadow-xl"
-              style={{ filter: 'hue-rotate(240deg) saturate(1.2)' }}
+              style={{ filter: 'hue-rotate(240deg)' }}
             />
           </div>
         </div>
