@@ -1,16 +1,13 @@
-
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { User } from "@/lib/types";
-import { Home, User as UserIcon, Shield, FileCheck, LogOut, Menu, X } from "lucide-react";
+import { Home } from "lucide-react";
 
 const Header = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     // Update header when auth state changes
@@ -48,27 +45,8 @@ const Header = () => {
     }
   };
 
-  const getRoleIcon = () => {
-    if (!currentUser) return null;
-
-    switch (currentUser.role) {
-      case "user":
-        return <UserIcon className="h-4 w-4" />;
-      case "police":
-        return <Shield className="h-4 w-4" />;
-      case "officer":
-        return <FileCheck className="h-4 w-4" />;
-      default:
-        return null;
-    }
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center space-x-2">
@@ -86,54 +64,34 @@ const Header = () => {
               <path d="M9 3v18" />
               <path d="m16 15-3-3 3-3" />
             </svg>
-            <span className="font-bold text-xl">Passport Automation System</span>
+            <span className="font-bold text-xl">PassportEase</span>
           </Link>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link
-              to="/"
-              className={`flex items-center space-x-1 text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === "/" ? "text-primary" : "text-gray-600"
-              }`}
-            >
-              <Home className="h-4 w-4" />
-              <span>Home</span>
-            </Link>
-            {currentUser && (
+          <Link
+            to="/"
+            className="flex items-center space-x-1 text-sm font-medium hover:underline"
+          >
+            <Home className="h-4 w-4" />
+            <span>Home</span>
+          </Link>
+        </div>
+        <nav className="flex items-center gap-6">
+          {currentUser ? (
+            <>
               <Link
                 to={getDashboardLink()}
-                className={`flex items-center space-x-1 text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname.includes("dashboard") ? "text-primary" : "text-gray-600"
-                }`}
+                className="text-sm font-medium hover:underline"
               >
-                {getRoleIcon()}
-                <span>Dashboard</span>
+                Dashboard
               </Link>
-            )}
-          </div>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Toggle Menu">
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-        </div>
-        
-        {/* Desktop Auth Actions */}
-        <nav className="hidden md:flex items-center gap-6">
-          {currentUser ? (
-            <div className="flex items-center gap-4">
-              <div className="rounded-full bg-secondary/10 px-3 py-1 text-sm font-medium flex items-center gap-1">
-                {getRoleIcon()}
-                <span>{currentUser.fullName}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium">
+                  {currentUser.fullName} ({currentUser.role})
+                </span>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
+                  Logout
+                </Button>
               </div>
-              <Button variant="outline" size="sm" onClick={handleLogout} className="flex items-center gap-1">
-                <LogOut className="h-4 w-4" />
-                Logout
-              </Button>
-            </div>
+            </>
           ) : (
             <div className="flex items-center gap-2">
               <Link to="/login">
@@ -148,60 +106,6 @@ const Header = () => {
           )}
         </nav>
       </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t bg-white">
-          <div className="container py-4 space-y-4">
-            <Link
-              to="/"
-              className={`flex items-center space-x-2 p-2 rounded-md transition-colors ${
-                location.pathname === "/" ? "bg-primary/10 text-primary" : "hover:bg-gray-100"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Home className="h-5 w-5" />
-              <span className="font-medium">Home</span>
-            </Link>
-            
-            {currentUser && (
-              <Link
-                to={getDashboardLink()}
-                className={`flex items-center space-x-2 p-2 rounded-md transition-colors ${
-                  location.pathname.includes("dashboard") ? "bg-primary/10 text-primary" : "hover:bg-gray-100"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {getRoleIcon()}
-                <span className="font-medium">Dashboard</span>
-              </Link>
-            )}
-            
-            {currentUser ? (
-              <div className="border-t pt-4 mt-4">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-medium">
-                    Signed in as <span className="text-primary">{currentUser.fullName}</span>
-                  </div>
-                  <Button variant="outline" size="sm" onClick={handleLogout} className="flex items-center gap-1">
-                    <LogOut className="h-4 w-4" />
-                    Logout
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <div className="border-t pt-4 mt-4 flex flex-col gap-3">
-                <Link to="/login" className="w-full" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="outline" className="w-full">Login</Button>
-                </Link>
-                <Link to="/register" className="w-full" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full">Register</Button>
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </header>
   );
 };

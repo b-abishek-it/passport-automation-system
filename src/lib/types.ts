@@ -29,9 +29,6 @@ export interface PassportApplication {
   policeStation: string;
   photoUrl: string;
   signatureUrl: string;
-  aadharUrl: string;
-  panUrl: string;
-  educationUrl: string;
   status: 'pending' | 'police_verified' | 'dispatched';
   policeVerified: boolean;
   officerVerified: boolean;
