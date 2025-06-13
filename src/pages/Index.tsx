@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Shield, FileCheck, User, Users, ArrowRight } from "lucide-react";
+import { Shield, FileCheck, User, ArrowRight } from "lucide-react";
 
 const Index = () => {
   return (
@@ -47,123 +47,92 @@ const Index = () => {
           </div>
         </div>
 
-        {/* User Types Section */}
-        <h2 className="text-3xl font-bold mb-8 text-center text-passport-blue">Access Your Portal</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <Card className="auth-card border-t-4 border-t-primary">
-            <CardHeader className="pb-3">
-              <div className="mb-2 flex justify-center">
-                <User className="h-10 w-10 text-primary" />
-              </div>
-              <CardTitle className="text-center">Applicant Portal</CardTitle>
-              <CardDescription className="text-center">
-                Apply for and manage your passport applications
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-passport-blue/70">
-                Submit new applications, track existing applications, upload required documents,
-                and download your e-passport once approved.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <div className="w-full space-y-3">
-                <Link to="/register" className="w-full">
-                  <Button className="w-full">Register Now</Button>
-                </Link>
+        {/* User Types Section - Updated Styling */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-primary/20">
+          <h2 className="text-3xl font-bold mb-8 text-center text-passport-blue">Access Your Portal</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="group hover:scale-105 transition-all duration-300 border-2 border-primary/20 hover:border-primary shadow-lg hover:shadow-xl bg-gradient-to-br from-white to-primary/5">
+              <CardHeader className="pb-3 text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="bg-primary/10 rounded-full h-16 w-16 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <User className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+                <CardTitle className="text-xl text-passport-blue">Applicant Portal</CardTitle>
+                <CardDescription className="text-passport-blue/70">
+                  Apply for and manage your passport applications
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-passport-blue/70 text-center">
+                  Submit new applications, track existing applications, upload required documents,
+                  and download your e-passport once approved.
+                </p>
+              </CardContent>
+              <CardFooter>
+                <div className="w-full space-y-3">
+                  <Link to="/register" className="w-full">
+                    <Button className="w-full bg-primary hover:bg-primary/90">Register Now</Button>
+                  </Link>
+                  <Link to="/login" className="w-full">
+                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">Login</Button>
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+
+            <Card className="group hover:scale-105 transition-all duration-300 border-2 border-primary/20 hover:border-primary shadow-lg hover:shadow-xl bg-gradient-to-br from-white to-primary/5">
+              <CardHeader className="pb-3 text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="bg-primary/10 rounded-full h-16 w-16 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <Shield className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+                <CardTitle className="text-xl text-passport-blue">Police Portal</CardTitle>
+                <CardDescription className="text-passport-blue/70">
+                  For police verification officers
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-passport-blue/70 text-center">
+                  Access and verify applicant details, conduct address verification,
+                  approve or request additional information from applicants.
+                </p>
+              </CardContent>
+              <CardFooter>
                 <Link to="/login" className="w-full">
-                  <Button variant="outline" className="w-full">Login</Button>
+                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                    Police Login
+                  </Button>
                 </Link>
-              </div>
-            </CardFooter>
-          </Card>
-
-          <Card className="auth-card border-t-4 border-t-primary">
-            <CardHeader className="pb-3">
-              <div className="mb-2 flex justify-center">
-                <Shield className="h-10 w-10 text-primary" />
-              </div>
-              <CardTitle className="text-center">Police Portal</CardTitle>
-              <CardDescription className="text-center">
-                For police verification officers
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-passport-blue/70">
-                Access and verify applicant details, conduct address verification,
-                approve or request additional information from applicants.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Link to="/login" className="w-full">
-                <Button className="w-full" variant="secondary">
-                  Police Login
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-
-          <Card className="auth-card border-t-4 border-t-primary">
-            <CardHeader className="pb-3">
-              <div className="mb-2 flex justify-center">
-                <FileCheck className="h-10 w-10 text-primary" />
-              </div>
-              <CardTitle className="text-center">Passport Officer Portal</CardTitle>
-              <CardDescription className="text-center">
-                For passport issuing authorities
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-passport-blue/70">
-                Review applications, verify submitted documents, manage passport
-                issuance, and handle passport queries.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Link to="/login" className="w-full">
-                <Button className="w-full" variant="secondary">
-                  Officer Login
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        </div>
-
-        {/* Features Section */}
-        <div className="bg-primary/5 rounded-2xl p-8 mb-12">
-          <h2 className="text-3xl font-bold mb-8 text-center text-passport-blue">Key Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="feature-card">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-medium mb-2">Digital Verification</h3>
-                <p className="text-passport-blue/70">
-                  Secure document verification process with multi-level checks
-                </p>
-              </CardContent>
+              </CardFooter>
             </Card>
-            <Card className="feature-card">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-medium mb-2">Real-time Tracking</h3>
-                <p className="text-passport-blue/70">
-                  Monitor your application status at every step of the process
+
+            <Card className="group hover:scale-105 transition-all duration-300 border-2 border-primary/20 hover:border-primary shadow-lg hover:shadow-xl bg-gradient-to-br from-white to-primary/5">
+              <CardHeader className="pb-3 text-center">
+                <div className="mb-4 flex justify-center">
+                  <div className="bg-primary/10 rounded-full h-16 w-16 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <FileCheck className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+                <CardTitle className="text-xl text-passport-blue">Passport Officer Portal</CardTitle>
+                <CardDescription className="text-passport-blue/70">
+                  For passport issuing authorities
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-passport-blue/70 text-center">
+                  Review applications, verify submitted documents, manage passport
+                  issuance, and handle passport queries.
                 </p>
               </CardContent>
-            </Card>
-            <Card className="feature-card">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-medium mb-2">Secure Document Storage</h3>
-                <p className="text-passport-blue/70">
-                  Encrypted storage for all your sensitive documents and information
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="feature-card">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-medium mb-2">E-Passport Support</h3>
-                <p className="text-passport-blue/70">
-                  Download electronic passports immediately upon approval
-                </p>
-              </CardContent>
+              <CardFooter>
+                <Link to="/login" className="w-full">
+                  <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                    Officer Login
+                  </Button>
+                </Link>
+              </CardFooter>
             </Card>
           </div>
         </div>
