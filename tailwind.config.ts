@@ -64,9 +64,9 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         passport: {
-          blue: "#20B2AA",
-          "light-blue": "#20B2AA",
-          "extra-light-blue": "#b2f5ea",
+          blue: "#2563eb",
+          "light-blue": "#3b82f6",
+          "extra-light-blue": "#bfdbfe",
         },
       },
       borderRadius: {
